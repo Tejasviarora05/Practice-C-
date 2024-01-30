@@ -1,0 +1,84 @@
+Question 1:
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Moves all zeros in the array to the right while maintaining the order of non-zero elements.
+void moveZerosToRight(vector<int>& arr) {
+    for (int i = 0, nonZeroIndex = 0; i < arr.size(); ++i) {
+        if (arr[i] != 0) {
+            swap(arr[i], arr[nonZeroIndex++]);
+        }
+    }
+}
+
+int main() {
+    int n;
+    cout << "Enter the size of the array (0 to exit): ";
+    cin >> n;
+
+    if (n == 0) {
+        cout << "Exiting program." << endl;
+        return 0;
+    }
+
+    if (n < 0 || n > 1000) {
+        cout << "Invalid size. Please enter a number between 1 and 1000." << endl;
+        return 1;
+    }
+
+    vector<int> arr(n);
+
+    cout << "Enter the elements of the array: ";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    moveZerosToRight(arr);
+
+    cout << "Array after moving zeros to the right: ";
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << (i < n - 1 ? ", " : "\n");
+    }
+
+    return 0;
+}
+Question 2:
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Number of elements must be positive." << endl;
+        return 1;
+    }
+
+    vector<int> arr(n);
+    cout << "Enter " << n << " elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Sorting the array
+    sort(arr.begin(), arr.end());
+
+    // Swapping adjacent elements to create a wave-like array
+    for (int i = 0; i < n - 1; i += 2) {
+        swap(arr[i], arr[i + 1]);
+    }
+
+    cout << "Wave array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << (i < n - 1 ? ", " : "\n");
+    }
+
+    return 0;
+}
